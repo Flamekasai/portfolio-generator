@@ -21,6 +21,7 @@ img {
 * {
     box-sizing: border-box;
     scroll-behavior: smooth;
+    font-family: sans-serif;
 }
 
 body {
@@ -215,6 +216,10 @@ nav a:hover, nav a:focus-visible {
 .project img {
     margin: 0 auto;
     border-radius: 1em;
+}
+
+.project img.missing {
+    visibility: hidden;
 }
 
 .project-technologies {

@@ -323,19 +323,24 @@ const projects = [
 
 function projectImage(id) {
     const missing = ["rolgrama", "uaprojects", "pl-transpiler"];
-    let fileName = id;
-    if (missing.includes(id)) {
+    let fileName = "";
+    if (!missing.includes(id)) {
+        fileName = id;
+    } else {
         fileName = "missing";
     }
-    return fileName;
+    if (fileName) {
+        return `<img src="../resources/projects/${fileName}.png">`
+    } else {
+        return `<img class="missing">`
+    }
 }
 
 export function getProjects(language) {
     return projects.map(project =>
     `
     <article id="${project.id}" class="project card">
-        <img
-            src="../resources/projects/${projectImage(project.id)}.png">
+        ${projectImage(project.id)}
         <div class="project-content">
             <h2 class="project-title">${project.name}</h2>
             <div class="project-technologies">
