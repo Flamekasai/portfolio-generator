@@ -1,1 +1,4 @@
-build/
+build/index.html
+build/en
+build/es
+project.vim
