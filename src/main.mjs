@@ -384,6 +384,10 @@ const literals = {
     "title-projects": {
         "en": "Projects",
         "es": "Proyectos"
+    },
+    "back-to-top": {
+        "en": "back to top",
+        "es": "volver al inicio",
     }
 };
 
@@ -462,7 +466,7 @@ function create_page(language) {
         <body>
             <div id="language-selector">
                 ${language_list}
-            </section>
+            </div>
             <section id="intro">
                 <img src="../resources/profile.jpg" />
                 <h1>
@@ -495,7 +499,7 @@ function create_page(language) {
                 </article>
             </section>
             <footer>
-            <a href="#top">Back to top</a>
+                <a href="#top">${get_literal("back-to-top", language)}</a>
             </footer>
         </body>
     </html>`;

@@ -35,10 +35,16 @@ body
     background-color: var(--clr-background);
 }
 
-section
+section,
+footer
 {
     margin:    3em auto;
     max-width: 80ch;
+}
+
+footer
+{
+    text-align: center;
 }
 
 h2
@@ -116,8 +122,6 @@ a
 {
     color: var(--clr-secondary);
     text-decoration: none;
-
-    target: blank;
 }
 
 a:hover,
