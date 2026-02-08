@@ -363,10 +363,10 @@ const literals = {
             who loves the carefull, from scratch, high quality craft of code.
         `,
         "es": `
-            Un <span class="text-accent">ingeniero informático</span> y
+            <span class="text-accent">Ingeniero informático</span> y
             <span class="text-accent">desarrollador de videojuegos</span> al que
-            le encanta la programación a bajo nivel y el desarrollo de software
-            de calidad.
+            le encanta la programación a bajo nivel (cerca del hardware) y el
+            desarrollo de software de calidad.
         `
     },
     "title-aboutme": {
@@ -622,6 +622,11 @@ function create_index() {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link rel="stylesheet" href="styles.css" />
             <style>
+            *
+            {
+                margin:  0;
+                padding: 0;
+            }
             body
             {
                 height: 100vh;
