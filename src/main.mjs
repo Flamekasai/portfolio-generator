@@ -365,8 +365,8 @@ const literals = {
         "es": `
             <span class="text-accent">Ingeniero informático</span> y
             <span class="text-accent">desarrollador de videojuegos</span> al que
-            le encanta la programación a bajo nivel (cerca del hardware) y el
-            desarrollo de software de calidad.
+            le encanta la creación artesanal de código desde cero buscando
+            la máxima calidad.
         `
     },
     "title-aboutme": {
