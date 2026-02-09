@@ -269,6 +269,48 @@ const projects = [
     },
 ];
 
+const studies = [
+    {
+        "from": `2024`,
+        "to": `2025`,
+        "title": {
+            "en": `Computer science degree`,
+            "es": `Grado en ingeniería informática`
+        },
+        "place": {
+            "en": `Alicante University, Spain`,
+            "es": `Universidad de Alicante, España`,
+        },
+        "url": "https://www.ua.es/",
+    },
+    {
+        "from": `2018`,
+        "to": `2020`,
+        "title": {
+            "en": `Bachelors Degree in software development`,
+            "es": `Grado superior en desarrollo de aplicaciones multiplataforma`
+        },
+        "place": {
+            "en": `I.E.S PereMaria Orts & Bosch, Spain`,
+            "es": `I.E.S PereMaria Orts & Bosch, España`,
+        },
+        "url": "",
+    },
+    {
+        "from": `2016`,
+        "to": `2018`,
+        "title": {
+            "en": `Associate Degree in computer systems and networks`,
+            "es": `Grado medio en sistemas microinformáticos y redes`
+        },
+        "place": {
+            "en": `I.E.S PereMaria Orts & Bosch, Spain`,
+            "es": `I.E.S PereMaria Orts & Bosch, España`,
+        },
+        "url": "",
+    },
+];
+
 const jobs = [
     {
         "from": `2024`,
@@ -369,6 +411,14 @@ const literals = {
             la máxima calidad.
         `
     },
+    "contact-phone": {
+        "en": "Phone",
+        "es": "Teléfono",
+    },
+    "contact-web": {
+        "en": "Website",
+        "es": "Página web",
+    },
     "title-aboutme": {
         "en": "About Me",
         "es": "Sobre mí",
@@ -380,6 +430,10 @@ const literals = {
     "title-jobs": {
         "en": "Professional Experience",
         "es": "Experiencia laboral"
+    },
+    "title-studies": {
+        "en": "Degrees and education",
+        "es": "Títulos y educación"
     },
     "title-projects": {
         "en": "Projects",
@@ -480,6 +534,22 @@ function create_page(language) {
                     <a href="mailto:adrianruizgjj@gmail.com" target="_blank">${resources["email"]}</a>
                 </div>
             </section>
+            <section id="print-intro">
+                <img src="../resources/profile.jpg" />
+                <h1>
+                    Adrián Ruiz García
+                </h1>
+                <p>${get_literal("intro-description", language)}</p>
+
+                <h2>Contact</h2>
+                <ul>
+                    <li>Email: adrianruizgjj@gmail.com</li>
+                    <li>${get_literal("contact-phone", language)}: +34 665 19 58 55</li>
+                    <li><a href="flamekasai.github.io">${get_literal("contact-web", language)}</a></li>
+                    <li><a href="www.linkedin.com/in/adrian-ruiz-garcia-050209194">Linkedin</a><li/>
+                    <li><a href="github.com/flamekasai">Github</a></li>
+                </ul>
+            </section>
             <section>
                 <h2>${get_literal("title-skills", language)}</h2>
                 <article id="skills">
@@ -490,6 +560,12 @@ function create_page(language) {
                 <h2>${get_literal("title-jobs", language)}</h2>
                 <article id="jobs">
                     ${create_jobs(language)}
+                </article>
+            </section>
+            <section id="studies">
+                <h2>${get_literal("title-studies", language)}</h2>
+                <article>
+                    ${create_studies(language)}
                 </article>
             </section>
             <section>
@@ -531,6 +607,46 @@ function create_skills(language) {
     return items;
 }
 
+function create_studies(language) {
+    return studies.map(study => {
+        const from        = typeof(study.from) == "string" ? study.from : study.from[language.id];
+        const to          = typeof(study.to) == "string" ? study.to : study.to[language.id];
+        const title       = study.title[language.id];
+        const place       = study.place[language.id];
+
+        let valid = true;
+
+        if (!title) {
+            console.error(`(studys) Missing study.title["${language.id}"] in ${study.title[language.id]} ${study.company}`);
+            valid = false;
+        }
+
+        if (!from) {
+            console.error(`(studys) Missing study.from["${language.id}"] in ${study.title[language.id]} ${study.company}`);
+            valid = false;
+        }
+
+        if (!to) {
+            console.error(`(studys) Missing study.to["${language.id}"] in ${study.title[language.id]} ${study.company}`);
+            valid = false;
+        }
+
+        if (!valid) {
+            return ``;
+        }
+
+        const place_element = study.url ? `<a href="${study.url}" target="_blank">${place}</a>` : place;
+
+        return `
+        <div class="card time-entry">
+            <span class="time-period"><time>${from}</time> &mdash; <time>${to}</time></span>
+            <h3>${study.title[language.id]} <span class="study-middot">&middot</span> ${place_element}</h3>
+        </div>
+        `;
+
+    }).join("\n");
+}
+
 function create_jobs(language) {
     return jobs.map(job => {
         const from        = typeof(job.from) == "string" ? job.from : job.from[language.id];
@@ -567,7 +683,7 @@ function create_jobs(language) {
         const company_name = job.url ? `<a href="${job.url}" target="_blank">${job.company}</a>` : job.company;
 
         return `
-        <div class="card job-entry">
+        <div class="card time-entry">
             <span class="time-period"><time>${from}</time> &mdash; <time>${to}</time></span>
             <h3>${job.position[language.id]} <span class="job-middot">&middot</span> ${company_name}</h3>
             ${description}
